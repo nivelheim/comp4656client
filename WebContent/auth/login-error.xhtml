@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html" 
+		xmlns:f="http://java.sun.com/jsf/core" 
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		>
+<h:head>
+	<title>Login Error</title>
+</h:head>
+<h:body>
+<h:outputStylesheet name="css/index.css" />
+	<main>
+	<ui:include src="/shared/navigation.xhtml" />
+		<section class="logerror">
+			<img src="#{request.contextPath}/resources/images/error.svg"/>
+			<h1>#{msgs.loginerrortitle}</h1>
+			<h3>#{msgs.loginerrorcontent}</h3>
+		</section>	
+	</main>
+	<ui:include src="/shared/footer.xhtml" />
+</h:body>
+</html>

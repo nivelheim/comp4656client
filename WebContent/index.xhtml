@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html" 
+		xmlns:f="http://java.sun.com/jsf/core" 
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		>
+<h:head>
+	<title>Index Page</title>
+</h:head>
+
+<h:body>
+<h:outputStylesheet name="css/index.css" />
+<h:outputScript library="primefaces" name="jquery/jquery.js" />
+<main>
+<ui:include src="/shared/navigation.xhtml" />
+	<section id="sectionOne">
+	<div>
+		<h3>Employee List</h3>
+		<h:form id="empTable">
+			<p:dataTable id="employeeDataTable" styleClass="a2-index-datatable"
+							value="#{qrBean.allEmployees}" var="e" lazy="true"
+							rows="5" paginator="true" paginatorPosition="bottom"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				             rowsPerPageTemplate="5,10,15">
+					<p:column headerText="#{msgs.employeeIdHeader}">
+						<h:outputText value="#{e.employeeId}" />
+					</p:column>
+					<p:column headerText="#{msgs.name1Header}" sortBy="#{e.firstName}" sortable="true">
+						<h:outputText value="#{e.firstName}" />
+					</p:column>
+					<p:column headerText="#{msgs.name2Header}">
+						<h:outputText value="#{e.lastName}" />
+					</p:column>
+					<p:column headerText="#{msgs.dob}"  sortBy="#{e.dob}" sortable="true">
+						<h:outputText value="#{e.dob == null ? 'Not Provided' : e.dob}">
+							<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+						</h:outputText>
+					</p:column>
+					<!--  
+					<p:column headerText="#{msgs.dob}"  sortBy="#{e.dateBirth}" sortable="true">
+						<h:outputText value="#{e.dateBirth == 0 ? 'Not Provided' : e.dateBirth}">
+							<f:convertDateTime pattern="yyyy/MM/dd"/>
+						</h:outputText>
+					</p:column>
+					-->
+				</p:dataTable>
+		</h:form>
+	</div>
+	
+	</section>
+	
+	
+	<section id="sectionTwo">
+	<div>
+		<h3>Find Employee</h3>
+		<h:form id="searchEmp">
+			<h:panelGrid id="searchGrid" columns="3">	
+				<h:outputLabel for="searchId" value="#{msgs.employeeIdHeader}"/>
+			   	<p:inputText id="searchId"  value="#{qrBean.searchId}">  
+			      	<f:validator validatorId="IdValidator" />
+	      		</p:inputText>    
+	      		<p:message for="searchId" />  
+	    	</h:panelGrid>	
+	    	<p:commandButton id="searchBtn" styleClass="searchbtnstyle" value="Find" action="#{qrBean.findEmployee}" update="searchGrid, searchMsg"
+	    	oncomplete="setTimeout(function() { $('.searchmsgstyle').html(''); }, 2000);"
+	    	/>
+	    	<p:messages id="searchMsg" styleClass="searchmsgstyle" rendered="#{not facesContext.validationFailed}"/>
+    	</h:form>
+	</div>
+	
+	<!--  <ui:fragment rendered="#{request.isUserInRole('admin')}"> -->
+	<div>
+		<h3>Add Employee</h3>
+		<h:form id="addEmp">
+			<h:panelGrid id="addGrid" columns="3">	
+				<h:outputLabel for="addIdValue" value="#{msgs.employeeIdHeader}"/>
+			    <p:inputText id="addIdValue" value="#{qrBean.addId}"  required="true" requiredMessage="#{msgs.fieldReq}">  
+		        	<f:validator validatorId="IdValidator" />
+		        </p:inputText>     
+		        <p:message for="addIdValue"/> 
+		        
+		        <h:outputLabel for="addFnValue" value="#{msgs.name1Header}"/>
+		        <p:inputText id="addFnValue" value="#{qrBean.addFirstName}" required="true" requiredMessage="#{msgs.fieldReq}"/>  
+		        <p:message for="addFnValue"/> 
+		        
+		    	<h:outputLabel for="addLnValue" value="#{msgs.name2Header}"/>
+		        <p:inputText id="addLnValue" value="#{qrBean.addLastName}" required="true" requiredMessage="#{msgs.fieldReq}"/>  
+	       	    <p:message for="addLnValue"/> 
+		       
+				<h:outputLabel for="addDbValue" value="#{msgs.dob}"/>
+		        <p:inputText id="addDbValue" value="#{qrBean.addDateBirth}"  >  
+		        	<f:validator validatorId="DateValidator" />
+		        </p:inputText> 
+	            <p:message for="addDbValue"/> 
+	        </h:panelGrid>
+        	<p:commandButton styleClass="addbtnstyle" value="Add" 
+        						action="#{qrBean.addEmployee}" update="addGrid, addMsg, :empTable:employeeDataTable"
+        						oncomplete="setTimeout(function() { $('.addmsgstyle').html(''); }, 2000);"
+        						/>
+	    	<p:messages id="addMsg" styleClass="addmsgstyle" rendered="#{not facesContext.validationFailed}"/>
+    	</h:form>
+	</div>
+	<!-- </ui:fragment> -->
+	
+	<!-- <ui:fragment rendered="#{request.isUserInRole('admin')}"> -->
+	<div>
+		<h3>Delete Employee</h3>	
+		<h:form id="delEmp">
+			<h:panelGrid id="delGrid" columns="3">	
+				<h:outputLabel for="deleteId" value="#{msgs.employeeIdHeader}"/>
+			    <p:inputText id="deleteId" value="#{qrBean.deleteId}">  
+		        	<f:validator validatorId="IdValidator" />
+		        </p:inputText>    
+	            <p:message for="deleteId"/>    
+	    	</h:panelGrid>	
+	    	<p:commandButton styleClass="delbtnstyle" onclick="return confirm('Are you sure?')" 
+	    						value="Delete" update="delGrid, delMsg, :empTable:employeeDataTable"
+	    						action="#{qrBean.deleteEmployee}"
+	    						oncomplete="setTimeout(function() { $('.delmsgstyle').html(''); }, 2000);" /> 			
+	    	<p:messages id="delMsg" styleClass="delmsgstyle" rendered="#{not facesContext.validationFailed}"/>
+    	</h:form>
+	</div>
+	
+	<div>
+		<h3>Update Employee</h3>
+		<h:form id="updEmp">
+			<h:panelGrid id="updGrid" columns="3">	
+				<h:outputLabel for="addIdValue" value="#{msgs.employeeIdHeader}"/>
+			    <p:inputText id="addIdValue" value="#{qrBean.addId}"  required="true" requiredMessage="#{msgs.fieldReq}">  
+		        	<f:validator validatorId="IdValidator" />
+		        </p:inputText>     
+		        <p:message for="addIdValue"/> 
+		        
+		        <h:outputLabel for="addFnValue" value="#{msgs.name1Header}"/>
+		        <p:inputText id="addFnValue" value="#{qrBean.addFirstName}" required="true" requiredMessage="#{msgs.fieldReq}"/>  
+		        <p:message for="addFnValue"/> 
+		        
+		    	<h:outputLabel for="addLnValue" value="#{msgs.name2Header}"/>
+		        <p:inputText id="addLnValue" value="#{qrBean.addLastName}" required="true" requiredMessage="#{msgs.fieldReq}"/>  
+	       	    <p:message for="addLnValue"/> 
+	        </h:panelGrid>
+        	<p:commandButton styleClass="addbtnstyle" value="Add" 
+        						action="#{qrBean.updateEmployee}" update="updGrid updMsg :empTable:employeeDataTable"
+        						oncomplete="setTimeout(function() { $('.addmsgstyle').html(''); }, 2000);"
+        						/>
+	    	<p:messages id="updMsg" styleClass="addmsgstyle" rendered="#{not facesContext.validationFailed}"/>
+    	</h:form>
+	</div>
+	</section>
+</main>
+<ui:include src="/shared/footer.xhtml" />
+</h:body>
+</html>

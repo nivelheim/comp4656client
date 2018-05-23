@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+html {
+	font-family: 'Roboto', sans-serif;
+}
+
+/*--------------Navigation Bar Properties--------------*/
+#a2-index-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#a2-index-nav li {
+    float: left;
+}
+
+#a2-index-nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+#a2-index-nav li a:hover {
+   	color: orange;
+}
+
+#a2-index-nav a:visited {
+	color: white;
+}
+
+#a2-index-nav a:link {
+	color: white;
+}
+/*--------------Navigation Bar Properties--------------*/
+
+
+
+/*--------------DataTable Properties--------------*/
+.ui-datatable.a2-index-datatable {
+	width: 600px;
+	font-size: 1.0em;
+}
+
+.a2-index-datatable th {
+	background: #333;
+	color: white;
+	border: 1px solid #333;
+}
+
+.a2-index-datatable tr {
+	background: white;
+	color: black;
+	border: 1px solid #333;
+}
+
+.a2-index-datatable div[role="navigation"] {
+	background: #333;
+	color: white;
+	border: 1px solid #333;
+}
+
+.a2-index-datatable a[aria-label="First Page"],
+.a2-index-datatable a[aria-label="Previous Page"],
+.a2-index-datatable a[aria-label="Next Page"],
+.a2-index-datatable a[aria-label="Last Page"],
+.a2-index-datatable a[href="#"],
+.a2-index-datatable select[name="empTable:employeeDataTable_rppDD"]
+{
+	background: #333;
+	color: white;
+	border: 1px solid white;
+}
+
+.a2-index-datatable a[href="#"]:hover
+{
+	background: #333;
+	color: orange;
+	border: 1px solid white;
+}
+
+.a2-index-datatable a[href="#"]:focus
+{
+	background: #333;
+	color: orange;
+	border: 1px solid white;
+}
+
+
+/*--------------DataTable Properties--------------*/
+
+#sectionOne {
+	margin-left: 15px;
+	float:left;
+	width:600px;
+	margin-right: 20px;
+}
+
+#sectionTwo {
+	float:left;
+	width:650px;
+}
+
+#sectionTwo h3, #sectionOne h3 {
+	background: #333;
+	color: white;
+}
+
+
+.front {
+	width: 700px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.logerror {
+	width: 700px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.about {
+	width: 700px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.contact{
+	width: 700px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.error {
+	width: 700px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.login {
+	width: 700px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.loginform{
+	text-align: center;
+	width: 40%;
+	margin: 0 auto;
+
+}
+
+.login h4 {
+	margin-bottom: 0px;
+}
+
+main {
+	min-width: 1300px;
+	max-width: 1300px;
+	height: 720px;
+  	margin: 0 auto;
+  	border: 1px solid black;
+}
+
+img {
+	width: 100px;
+	height: 100px;
+}
+
+.logoutbtnstyle{
+	width: 100px;
+	float: right;
+	font-size: 1.0em;
+	background: #333;
+	color: white;
+}
+
+.addbtnstyle, .delbtnstyle, .searchbtnstyle{
+	width: 100px;
+	margin-left: 227px;
+	font-size: 1.0em;
+	background: #333;
+	color: white;
+}
+
+.logoutbtnstyle:hover, .addbtnstyle:hover, .delbtnstyle:hover, .searchbtnstyle:hover, .loginBtn:hover{
+	color:orange;
+}
+
+.loginBtn{
+	width: 100px;
+	background-color: #333;
+	color: white;
+	border: 1px solid #333;
+	margin-top: 20px;
+}
+
+footer {
+	min-width: 1300px;
+	max-width: 1300px;
+	background-color: #333;
+	margin: 0 auto;
+	border: 1px solid black;
+	color: white;
+	text-align: center;
+	
+}
+/*--------------Login.xhtml Properties--------------*/
+
+
+.login {
+	margin: 0 auto;
+	 width: 500px;
+}
+
+.login form { 
+	display: table;      
+}
+.login div { 
+	display: table-row;  
+}
+.login label { 
+	display: table-cell; 
+}
+.login input[type="text"] { 
+	display: table-cell; 
+	width: 250px;
+}
+.login input[type="password"] { 
+	display: table-cell; 
+	width: 250px;
+}
+#lButton {
+	float:right;
+}
+/*--------------Login.xhtml Properties--------------*/
